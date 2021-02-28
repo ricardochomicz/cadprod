@@ -230,20 +230,42 @@ return [
             'topnav' => true,
         ],
         [
+            'text' => 'Dashboard',
+            'url'  => 'admin',
+            'icon'        => 'fas fa-fw fa-tachometer-alt mr-2',
+        ],
+        [
             'text' => 'Categorias',
             'url'  => 'admin/categories',
             'icon'        => 'fas fa-fw fa-tags mr-2',
-            'label'       => 4,
-            'label_color' => 'success',
         ],
         [
             'text'        => 'Produtos',
             'url'         => 'admin/products',
             'icon'        => 'fas fa-fw fa-barcode mr-2',
-            'label'       => 4,
-            'label_color' => 'success',
         ],
-        
+        [
+            'text' => 'Usuários',
+            'url'  => 'admin/users',
+            'icon'        => 'fas fa-fw fa-id-card-alt mr-2',
+        ],
+        [
+            'text' => 'Relatórios',
+            'icon'        => 'fas fa-fw fa-chart-line mr-2',
+            'submenu' => [
+                [
+                    'text' => 'Meses',
+                    'url' => 'admin/reports/months',
+                    'icon' => 'fas fa-fw fa-calendar-alt mr-2'
+                ],
+                [
+                    'text' => 'Anos',
+                    'url' => 'admin/reports/years',
+                    'icon' => 'fas fa-fw fa-calendar-alt mr-2'
+                ]
+            ]
+        ],
+
     ],
 
     /*
@@ -302,26 +324,26 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
                 ],
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
                 ],
             ],
