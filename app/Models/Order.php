@@ -19,8 +19,18 @@ class Order extends Model
             ->wherePivot('qty', 'price');
     }
 
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function dateFormat($date)
+    {
+        return implode('/', array_reverse(explode('-', $date)));
     }
 }

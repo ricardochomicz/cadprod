@@ -235,6 +235,22 @@ return [
             'icon'        => 'fas fa-fw fa-tachometer-alt mr-2',
         ],
         [
+            'text' => 'Vendas',
+            'icon'        => 'fas fa-fw fa-cart-arrow-down mr-2',
+            'submenu' => [
+                [
+                    'text' => 'Nova Venda',
+                    'url' => 'admin/orders/create',
+                    'icon' => 'fas fa-fw fa-cart-plus mr-2'
+                ],
+                [
+                    'text' => 'Listagem de Vendas',
+                    'url' => 'admin/orders',
+                    'icon' => 'fas fa-fw fa-list-alt mr-2'
+                ],
+            ]
+        ],
+        [
             'text' => 'Categorias',
             'url'  => 'admin/categories',
             'icon'        => 'fas fa-fw fa-tags mr-2',
@@ -262,6 +278,11 @@ return [
                     'text' => 'Anos',
                     'url' => 'admin/reports/years',
                     'icon' => 'fas fa-fw fa-calendar-alt mr-2'
+                ],
+                [
+                    'text' => 'VueJS',
+                    'url' => 'admin/reports/vue',
+                    'icon' => 'fas fa-fw fa-chart-pie mr-2'
                 ]
             ]
         ],

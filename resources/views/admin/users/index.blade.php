@@ -10,7 +10,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="{{ route('users.index') }}">usuários</a></li>
+                <li class="breadcrumb-item active"><a href="{{ route('users.index') }}">Usuários</a></li>
             </ol>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <div class="card-header">
                 <form action="{{ route('users.search') }}" class="form-inline float-left" method="POST">
                     @csrf
-                    
+
                     <input type="search" name="name" class="form-control form-control-sm mr-1" placeholder="Usuário"
                         value="{{ $data['name'] ?? '' }}">
                     <button class="btn btn-sm btn-secondary" type="submit"><i class="fas fa-search mr-1"></i>
@@ -51,13 +51,13 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-                            <tr>
+                            <tr class="{{ $user->status != 1 ? 'text-danger' : '' }}">
                                 <td class="align-middle">{{ $user->id }}</td>
                                 <td class="align-middle">{{ $user->name }}</td>
                                 <td class="align-middle">{{ $user->email }}</td>
                                 <td class="align-middle text-center">
-                                    <a href="{{ route('users.edit', $user->id) }}"
-                                        class="btn btn-sm btn-primary"><i class="fas fa-pen"></i> Editar</a>
+                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-primary"><i
+                                            class="fas fa-pen"></i> Editar</a>
                                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-info"><i
                                             class="fas fa-search"></i> Ver</a>
                                 </td>

@@ -25,11 +25,15 @@ class BaseEloquentRepository implements RepositoryInterface
     }
     public function findWhere($column, $valor)
     {
-        return $this->entity->where($column, $valor)->get();
+        return $this->entity
+            ->where($column, $valor)
+            ->get();
     }
     public function findWhereFirst($column, $valor)
     {
-        return $this->entity->where($column, $valor)->first();
+        return $this->entity
+            ->where($column, $valor)
+            ->first();
     }
     public function paginate($totalPage = 10)
     {
@@ -42,7 +46,7 @@ class BaseEloquentRepository implements RepositoryInterface
     public function update($id, array $data)
     {
         $entity = $this->findById($id);
-        return $this->entity->save($entity, $data);
+        return $this->entity->update($entity, $data);
     }
     public function delete($id)
     {
@@ -51,8 +55,7 @@ class BaseEloquentRepository implements RepositoryInterface
 
     public function resolveEntity()
     {
-        if(!method_exists($this, 'entity'))
-        {
+        if (!method_exists($this, 'entity')) {
             throw new NotEntityDefined;
         }
         return app($this->entity);

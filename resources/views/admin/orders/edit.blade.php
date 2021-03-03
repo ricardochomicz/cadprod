@@ -1,24 +1,26 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Produto')
+@section('title', 'Nova Venda')
 
 @section('content_header')
-    <h1>Produtos</h1>
+    <h1>Ordens</h1>
 @stop
 
 @section('content')
     <div class="content">
         <div class="card card-outline card-secondary ">
             <div class="card-header">
-                <h3 class="card-title">Editar Produto</h3>
+                <h3 class="card-title">Nova Venda</h3>
+                <div class="card-tools">
+                    <a href="{{ route('orders.index') }}" class="btn btn-sm btn-default">Voltar</a>
+                </div>
             </div>
             <div class="card-body">
                 @include('admin.alerts.alerts')    
-                {!!Form::model($product, ['route' => ['products.update', $product->id], 'class' => 'form'])!!}
+                {!!Form::model($order, ['route' => ['orders.update', $order->id], 'class' => 'form'])!!}
                     @method('PUT')
-                    @include('admin.products._partials.form')
+                    @include('admin.orders._partials.form')
                 {!! Form::close() !!}
-                
             </div>
         </div>
     </div>

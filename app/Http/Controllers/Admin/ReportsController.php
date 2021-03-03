@@ -29,18 +29,20 @@ class ReportsController extends Controller
         return view('admin.charts.chart', compact('chart'));
     }
 
-    public function years(ReportsChart $chart, int $yearStart = null)
+    public function years(ReportsChart $chart, $yearStart = null, $yearEnd = null)
     {
+        $yearStart = $yearStart ?? date('Y') - 3;
+        $yearEnd = $yearEnd ?? date('Y');
         $year = $this->getDataYear();
-        $color = '#' . dechex(rand(0x000000, 0xFFFFFF));
+
         $chart->labels($year['labels']);
-        
-            $chart->dataset('Relatório de Vendas', 'bar', $year['values'])
+
+        $color = '#' . dechex(rand(0x000000, 0xFFFFFF));
+        $chart->dataset('Relatório de Vendas', 'bar', $year['values'])
             ->options([
-                'backgroundColor' => $color,
+                'backgroundColor' => 'rgba(75, 148, 191, 0.5)',
             ]);
-        
-        
+
         /*
         $chart->dataset('2019', 'bar', $this->getData(2019))
             ->options([
@@ -67,9 +69,35 @@ class ReportsController extends Controller
             ->groupBy(DB::raw('YEAR(date)'))
             //->pluck('sums')
             ->get();
+
+        $values = $data->map(function ($order, $key) {
+            return number_format($order->total, 2, '.', '');
+        });
         return [
             'labels' => $data->pluck('year'),
-            'values' => $data->pluck('total')
+            'values' => $values //$data->pluck('total')
+        ];
+    }
+
+    public function vue()
+    {
+        return view('admin.charts.vue');
+    }
+
+    public static function getReportsMonthByYear(int $year): array
+    {
+        $data = Order::select(DB::raw('sum(total) as total'), DB::raw('EXTRACT(MONTH from date) as months'))
+            ->groupBy(DB::raw('MONTH(date)'))
+            //->pluck('sums')
+            ->whereYear('date', $year)
+            ->get();
+
+        $values = $data->map(function ($order, $key) {
+            return number_format($order->total, 2, '.', '');
+        });
+        return [
+            'labels' => $data->pluck('months'),
+            'values' => $values //$data->pluck('total')
         ];
     }
 }

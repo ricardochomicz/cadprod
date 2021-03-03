@@ -25,7 +25,7 @@
             <div class="col-sm-4 invoice-col">
                 <address>
                     E-mail: <strong>{{ $user->email }}</strong><br>
-                    Status: <strong>@if($user->status) Ativo @else Inativo @endif</strong><br>
+                    Status: <strong>@if($user->status == 1) Ativo @else Inativo @endif</strong><br>
                 </address>
             </div>
             <!-- /.col -->
