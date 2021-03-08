@@ -40,7 +40,12 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(
             'admin.orders.*',
             function ($view) {
-                $status = [1 => 'Aguardando Pagamento', 2 => 'Teste2', 3 => 'Teste3', 4 => 'Teste4'];
+                $status = [
+                    1 => 'Aguardando Pagamento', 
+                    2 => 'Cancelado', 
+                    3 => 'Pago', 
+                    4 => 'Análise de Crédito'
+                ];
                 $view->with('status', $status);
             }
         );

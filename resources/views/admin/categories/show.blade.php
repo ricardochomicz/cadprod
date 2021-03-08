@@ -36,7 +36,9 @@
                 <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Deletar</button>
+                    <a href="{{ route('categories.index') }}" class="btn btn-sm btn-default"><i
+                        class="fas fa-arrow-circle-left"></i> Voltar</a>
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Deletar</button>
                 </form>
             </div>
         </div>

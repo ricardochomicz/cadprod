@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -16,7 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::with('products', 'sales')->paginate();
 
         return view('admin.orders.index', compact('orders'));
     }
@@ -28,7 +29,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-       
+
         return view('admin.orders.create');
     }
 
@@ -39,13 +40,20 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $product = Product::find($request->product_id);
-        //$product->sales()->create($request->all());
+    { 
         $data = $request->all();
-        $data['identify'] = '#'.rand();
-        $data['code'] = '#'.rand();
-        Order::create($data);
+        $data['identify'] = '#' . rand();
+        $data['code'] = '#' . rand();
+        $order_id = Order::create($data)->id;
+       
+        for($i = 0; $i < count($request->product_id); $i++){
+            $sale = Sale::create([
+                'order_id' => $order_id,
+                'product_id' => $request->product_id[$i],
+                'price' => $request->price[$i],
+                'qty' => $request->qty[$i]
+            ]);
+        }
 
         return redirect()->route('orders.index');
     }
@@ -58,7 +66,10 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        if(!$order = Order::with('sales')->find($id)){
+            return redirect()->back();
+        }
+        return view('admin.orders.show', compact('order'));
     }
 
     /**
@@ -69,9 +80,9 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-       
+
         if (!$order = Order::find($id)) {
-           return redirect()->back();
+            return redirect()->back();
         }
         return view('admin.orders.edit', compact('order'));
     }
@@ -100,6 +111,35 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
+        //
+    }
+
+    public function search(Request $request)
+    {
+        $data = $request->except('_token');
+        $orders = Order::where(function ($query) use ($request) {
+            if ($request->identify) {
+                $query->where('identify', 'LIKE', "%{$request->identify}%");
+            }
+            if ($request->payment_method) {
+                $query->orWhere('payment_method', $request->payment_method);
+            }
+            if ($request->status) {
+                $query->where('status', $request->status);
+            }
+        })
+            ->orderBy('date', 'asc')
+            ->paginate();
+
+        return view('admin.orders.index', compact('orders', 'data'));
+    }
+
+    public function showProductOrder($id)
+    {
+        if(!$orders = Order::find(218)){
+            return redirect()->back();
+        }
+        return response()->json($orders->products);
         //
     }
 }

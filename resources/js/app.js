@@ -8,6 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -21,6 +22,9 @@ window.Vue = require('vue').default;
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('reports-months', require('./components/Reports/Months.vue').default);
+Vue.component('form-create-products', require('./components/OrderProduct/OrderProductCreate.vue').default);
+Vue.component('form-edit-products', require('./components/OrderProduct/OrderProductEdit.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31,3 +35,4 @@ Vue.component('reports-months', require('./components/Reports/Months.vue').defau
 const app = new Vue({
     el: '#app',
 });
+

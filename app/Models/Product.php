@@ -29,8 +29,7 @@ class Product extends Model
 
     public function orders()
     {
-        return $this->belongsToMany(Order::class)
-            ->wherePivot('qty', 'price');
+        return $this->belongsToMany(Order::class);
     }
 
     public function setNameAttribute($value)

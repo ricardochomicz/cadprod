@@ -106,4 +106,12 @@ class ProductController extends Controller
 
         return view('admin.products.index', compact('products', 'data'));
     }
+
+    public function getProductsVue()
+    {
+        $products = Product::all();
+
+        return response()->json($products);
+
+    }
 }

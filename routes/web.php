@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
+    Route::any('orders/search', [OrderController::class, 'search'])->name('orders.search');
     Route::resource('orders', OrderController::class);
 
     Route::get('reports/vue', [ReportsController::class, 'vue'])->name('reports.vue');

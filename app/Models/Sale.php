@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['order_id', 'product_id', 'price', 'qty'];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

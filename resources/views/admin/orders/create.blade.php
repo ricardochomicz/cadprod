@@ -14,7 +14,6 @@
             </div>
             <div class="card-body">
                 @include('admin.alerts.alerts')    
-               
                     {!! Form::open(['route' => 'orders.store', 'class' => 'form'])!!}
                     @include('admin.orders._partials.form')
                     {!! Form::close() !!}

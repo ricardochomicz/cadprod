@@ -28,30 +28,11 @@
 <hr>
 
 <div class="row">
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="">Produto</label>
-            {{ Form::select('product_id', $products, null, ['class' => 'form-control select2']) }}
-        </div>
-    </div>
-    <div class="col-sm-1">
-        <div class="form-group">
-            <label for="">Qtd</label>
-            {{ Form::text('qty', null, ['class' => 'form-control']) }}
-        </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="form-group">
-            <label for="">Preço</label>
-            {{ Form::text('price', null, ['class' => 'form-control']) }}
-        </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="form-group">
-            <label for="">Total Ordem</label>
-            {{ Form::text('total', null, ['class' => 'form-control']) }}
-        </div>
-    </div>
+    @if (explode('/', Request::url())[5] == 'create')
+        <form-create-products></form-create-products>
+    @else
+        <form-edit-products></form-edit-products>
+    @endif
 </div>
 
 <hr>
@@ -59,13 +40,13 @@
     <div class="col-sm-3">
         <div class="form-group">
             <label for="">Status Venda</label>
-            {{ Form::select('status', $status, null, ['class' => 'form-control']) }}
+            {{ Form::select('status', $status, null, ['placeholder' => 'Selecione o Status', 'class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
             <label for="">Método de Pagamento</label>
-            {{ Form::select('payment_method', $payments, null, ['class' => 'form-control']) }}
+            {{ Form::select('payment_method', $payments, null, ['placeholder' => 'Selecione o Método Pgto', 'class' => 'form-control']) }}
         </div>
     </div>
 </div>

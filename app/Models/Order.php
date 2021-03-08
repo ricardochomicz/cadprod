@@ -16,12 +16,12 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'sales')
-            ->wherePivot('qty', 'price');
+        ->withPivot('qty', 'price');
     }
 
     public function sales()
     {
-        return $this->hasMany(Sale::class);
+        return $this->hasMany(Sale::class, 'order_id');
     }
 
     public function user()

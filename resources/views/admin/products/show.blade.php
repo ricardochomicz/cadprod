@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-12">
                 <h5>
-                    <i class="fas fa-tags mr-2"></i> {{ $product->name }}
+                    <i class="fas fa-barcode mr-2"></i> {{ $product->name }}
                     <small class="float-right">Criado em: {{ $product->created_at->format('d/m/Y') }}</small>
                 </h5>
             </div>
@@ -37,7 +37,9 @@
                 <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Deletar</button>
+                    <a href="{{ route('products.index') }}" class="btn btn-sm btn-default"><i
+                        class="fas fa-arrow-circle-left"></i> Voltar</a>
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Deletar</button>
                 </form>
             </div>
         </div>

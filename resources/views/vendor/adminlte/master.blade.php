@@ -109,6 +109,7 @@
     @yield('adminlte_js')
 
     <script src="{{ url('js/app.js') }}"></script>
+    <script src="https://rawgit.com/vuejs-tips/v-money/master/dist/v-money.js"></script>
 
 
 </body>
